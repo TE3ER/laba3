@@ -53,28 +53,81 @@ const createOrUpdateReservation = async () => {
 </script>
 
 <template>
-  <div>
-    <h2>{{ route.params.reservationID ? 'Оновити' : 'Створити' }} бронювання</h2>
-    <form @submit.prevent="createOrUpdateReservation">
-      <label>Клієнт ID:</label>
-      <input v-model="newReservation.customerID" required />
+  <div class="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-center mb-6">
+      {{ route.params.reservationID ? 'Оновити' : 'Створити' }} бронювання
+    </h2>
 
-      <label>Готель ID:</label>
-      <input v-model="newReservation.hotelID" required />
+    <form @submit.prevent="createOrUpdateReservation" class="space-y-4">
+      <div class="flex flex-col">
+        <label for="customerID" class="text-lg font-medium">Клієнт ID:</label>
+        <input
+          id="customerID"
+          v-model="newReservation.customerID"
+          required
+          class="p-2 border border-gray-300 rounded-lg"
+        />
+      </div>
 
-      <label>Дата в'їзду:</label>
-      <input type="datetime-local" v-model="newReservation.checkin" required />
+      <div class="flex flex-col">
+        <label for="hotelID" class="text-lg font-medium">Готель ID:</label>
+        <input
+          id="hotelID"
+          v-model="newReservation.hotelID"
+          required
+          class="p-2 border border-gray-300 rounded-lg"
+        />
+      </div>
 
-      <label>Дата виїзду:</label>
-      <input type="datetime-local" v-model="newReservation.checkout" required />
+      <div class="flex flex-col">
+        <label for="checkin" class="text-lg font-medium">Дата в'їзду:</label>
+        <input
+          id="checkin"
+          type="datetime-local"
+          v-model="newReservation.checkin"
+          required
+          class="p-2 border border-gray-300 rounded-lg"
+        />
+      </div>
 
-      <label>Кількість гостей:</label>
-      <input type="number" v-model="newReservation.numberOfGuests" min="1" required />
+      <div class="flex flex-col">
+        <label for="checkout" class="text-lg font-medium">Дата виїзду:</label>
+        <input
+          id="checkout"
+          type="datetime-local"
+          v-model="newReservation.checkout"
+          required
+          class="p-2 border border-gray-300 rounded-lg"
+        />
+      </div>
 
-      <label>Коментар:</label>
-      <textarea v-model="newReservation.reservationComments"></textarea>
+      <div class="flex flex-col">
+        <label for="numberOfGuests" class="text-lg font-medium">Кількість гостей:</label>
+        <input
+          id="numberOfGuests"
+          type="number"
+          v-model="newReservation.numberOfGuests"
+          min="1"
+          required
+          class="p-2 border border-gray-300 rounded-lg"
+        />
+      </div>
 
-      <button type="submit">{{ route.params.reservationID ? 'Оновити' : 'Забронювати' }}</button>
+      <div class="flex flex-col">
+        <label for="reservationComments" class="text-lg font-medium">Коментар:</label>
+        <textarea
+          id="reservationComments"
+          v-model="newReservation.reservationComments"
+          class="p-2 border border-gray-300 rounded-lg"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
+      >
+        {{ route.params.reservationID ? 'Оновити' : 'Забронювати' }}
+      </button>
     </form>
   </div>
 </template>

@@ -33,21 +33,46 @@ const editReservation = (reservationID) => {
 </script>
 
 <template>
-  <div>
-    <h1>Список бронювань</h1>
+  <div class="p-6 max-w-7xl mx-auto">
+    <h1 class="text-2xl font-semibold text-center mb-6">Список бронювань</h1>
+
     <router-link to="/reservation">
-      <button>Додати нове бронювання</button>
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none mb-4 block mx-auto"
+      >
+        Додати нове бронювання
+      </button>
     </router-link>
-    <ul>
-      <li v-for="res in reservations" :key="res.reservationID">
-        <div>
-          Бронювання #{{ res.reservationID }} | Готель: {{ res.hotelID }} | Дата в'їзду:
-          {{ res.checkin }}
-          <button @click="editReservation(res.reservationID)">Редагувати</button>
-          <button @click="deleteReservation(res.reservationID)">Видалити</button>
+
+    <ul class="space-y-4">
+      <li
+        v-for="res in reservations"
+        :key="res.reservationID"
+        class="bg-white p-4 shadow-lg rounded-lg"
+      >
+        <div class="flex justify-between items-center">
+          <span class="text-lg font-medium">
+            Бронювання #{{ res.reservationID }} | Готель: {{ res.hotelID }} | Дата в'їзду:
+            {{ res.checkin }}
+          </span>
+          <div class="flex space-x-2">
+            <button
+              @click="editReservation(res.reservationID)"
+              class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none"
+            >
+              Редагувати
+            </button>
+            <button
+              @click="deleteReservation(res.reservationID)"
+              class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none"
+            >
+              Видалити
+            </button>
+          </div>
         </div>
       </li>
     </ul>
+
     <div class="p-10 mb-14">
       <router-view></router-view>
     </div>
