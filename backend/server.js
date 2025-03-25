@@ -2,11 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const sql = require("mssql");
 const cors = require("cors");
+const path = require("path"); // ✅ Додано імпорт path
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
+
 // Конфігурація бази даних
 const dbConfig = {
   user: process.env.DB_USER,
@@ -31,7 +33,7 @@ async function connectDB() {
 
 connectDB();
 
-// API-запит для отримання даних
+// API-запити
 app.get("/users", async (req, res) => {
   try {
     let result = await sql.query("SELECT * FROM Users");
@@ -82,6 +84,6 @@ app.post("/reservations", async (req, res) => {
   }
 });
 
-// Запуск сервера
-const PORT = 3000;
+// Запуск сервера (✅ виправлений порт)
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
